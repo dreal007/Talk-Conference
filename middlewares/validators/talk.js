@@ -116,4 +116,34 @@ const deleteTalkSchema = {
     }
 }
 
-module.exports = { createTalkSchema, updateTalkSchema, deleteTalkSchema }
+const getTalkSchema = {
+    id: {
+        in: ['params']
+    }
+}
+
+const getAllTalkSchema = {
+    limit: {
+        in: ['query'],
+        isString : true,
+        toInt : true,
+        optional : true,
+        errorMessage : 'Limit must be a number'
+    },
+
+    skip: {
+        in: ['query'],
+        isString: true,
+        optional : true,
+        errorMessage: 'Skip must be a number'
+    },
+
+    filter: {
+        in: ['query'],
+        optional: true,
+        errorMessage: 'Filter must be an object'
+    },
+
+}
+
+module.exports = { createTalkSchema, updateTalkSchema, deleteTalkSchema, getTalkSchema, getAllTalkSchema }

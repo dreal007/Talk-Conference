@@ -22,7 +22,18 @@ Cntrl.createTalk = function(req, res){
 }
 
 Cntrl.getAllTalks = function(req, res){
-    
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        let msg = transformExpressValidationErrors(errors.array());
+        return res.status(400).json(transformResponse(0, msg, errors.mapped()));
+    }
+
+    let query = req.query;
+    getTalks(query).then((talks)=>{
+        res.json(transformResponse(1, 'ok', talks));
+    }).catch((error)=>{
+        res.status(400).json(transformResponse(0, error.message));
+    });
 }
 
 Cntrl.deleteOne = function(req, res){
