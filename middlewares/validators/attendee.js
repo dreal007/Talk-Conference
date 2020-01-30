@@ -100,6 +100,7 @@ const getAllAttendeeSchema = {
     skip: {
         in: ['query'],
         isString: true,
+        toInt : true,
         optional : true,
         errorMessage: 'Skip must be a number'
     },
