@@ -55,11 +55,6 @@ const removeTalkEventSchema = {
 }
 
 const removeAttendeeTalkEventSchema = {
-    // talk_id: {
-    //     in: ['params'],
-    //     isString: true,
-    //     errorMessage: 'Please provide talk_id in params'
-    // },
 
     talk_id: {
         in: ['body'],

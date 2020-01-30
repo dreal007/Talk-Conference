@@ -66,9 +66,4 @@ function remove(params){
     return TalkEvent.deleteOne({ _id: params.id});
 }
 
-// function updateTalk(id, talk) {
-//     return Talk.findOneAndUpdate({ _id: id }, { $set: { ...talk } }, { new: true });
-// }
-
-
 module.exports = { get, remove, getWithPopulate, createTalkEvent, addAttendeeToTalk, removeAttendeeFromTalk }

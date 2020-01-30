@@ -17,7 +17,5 @@ router.delete('/:id', checkSchema(removeTalkEventSchema), Controller.remove);
 router.post('/', checkSchema(addAttendeeToTalkEventSchema), Controller.addAttendeeToTalk);
 router.post('/remove', checkSchema(removeAttendeeTalkEventSchema), Controller.removeAttendeeFromTalk);
 router.get('/:talk_id', checkSchema(getTalkEventSchema), Controller.get);
-// router.get('/:id', checkSchema(getTalkSchema), Controller.getAllTalks);
-// router.put('/:id', checkSchema(updateTalkSchema), Controller.updateTalk);
 
 module.exports = router;
