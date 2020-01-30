@@ -1,10 +1,11 @@
-//const { TalkEvent, Talk, Attendee } = require('../models');
+'use strict'
+
 const { transformResponse, transformExpressValidationErrors } = require('../utils/transformer');
 const { validationResult } = require('express-validator');
-const { createTalk, getTalks, deleteTalk, updateTalk } = require('../processors/talk');
+const { createAttendee, getAttendees, deleteAttendee, updateAttendee } = require('../processors/attendee');
 const Cntrl = {}
 
-Cntrl.createTalk = function(req, res){
+Cntrl.createAttendee = function(req, res){
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -12,16 +13,16 @@ Cntrl.createTalk = function(req, res){
         return res.status(400).json(transformResponse(0, msg, errors.mapped()));
     }
 
-    let talk = req.body;
+    let attendee = req.body;
 
-    createTalk(talk).then((newTalk)=>{
-        res.json(transformResponse(1, 'ok', newTalk));
+    createAttendee(attendee).then((newAttendee)=>{
+        res.json(transformResponse(1, 'ok', newAttendee));
     }).catch((error)=>{
         res.status(400).json(transformResponse(0, error.message));
     });
 }
 
-Cntrl.getAllTalks = function(req, res){
+Cntrl.getAllAttendees = function(req, res){
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         let msg = transformExpressValidationErrors(errors.array());
@@ -31,28 +32,28 @@ Cntrl.getAllTalks = function(req, res){
     let query = req.query;
     if(req.params.id) query.id = req.params.id;
 
-    getTalks(query).then((talks)=>{
-        res.json(transformResponse(1, 'ok', talks));
+    getAttendees(query).then((Attendees)=>{
+        res.json(transformResponse(1, 'ok', Attendees));
     }).catch((error)=>{
         res.status(400).json(transformResponse(0, error.message));
     });
 }
 
-Cntrl.deleteTalk = function(req, res){
+Cntrl.deleteAttendee = function(req, res){
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         let msg = transformExpressValidationErrors(errors.array());
         return res.status(400).json(transformResponse(0, msg, errors.mapped()));
     }
 
-    deleteTalk(req.params.id).then((deletedTalk) => {
-        res.json(transformResponse(1, 'ok', deletedTalk));
+    deleteAttendee(req.params.id).then((deletedAttendee) => {
+        res.json(transformResponse(1, 'ok', deletedAttendee));
     }).catch((error) => {
         res.status(400).json(transformResponse(0, error.message));
     });
 }
 
-Cntrl.updateTalk = function (req, res) {
+Cntrl.updateAttendee = function (req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         let msg = transformExpressValidationErrors(errors.array());
@@ -61,8 +62,8 @@ Cntrl.updateTalk = function (req, res) {
 
     let body = req.body;
 
-    updateTalk(req.params.id, body).then((updatedTalk) => {
-        res.json(transformResponse(1, 'ok', updatedTalk));
+    updateAttendee(req.params.id, body).then((updatedAttendee) => {
+        res.json(transformResponse(1, 'ok', updatedAttendee));
     }).catch((error) => {
         res.status(400).json(transformResponse(0, error.message));
     });

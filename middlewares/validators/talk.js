@@ -54,7 +54,8 @@ const createTalkSchema = {
 
 const updateTalkSchema = {
     id : {
-        in : ['params']
+        in : ['params'],
+        errorMessage: 'No params id provided'
     },
     name: {
         in: ['body'],
@@ -112,13 +113,15 @@ const updateTalkSchema = {
 
 const deleteTalkSchema = {
     id: {
-        in: ['params']
+        in: ['params'],
+        errorMessage: 'No params id provided'
     }
 }
 
 const getTalkSchema = {
     id: {
-        in: ['params']
+        in: ['params'],
+        errorMessage: 'No params id provided'
     }
 }
 
