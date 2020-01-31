@@ -12,7 +12,11 @@ module.exports = function (mongoose, connection) {
         date: { type: Date, required: true },
         duration: { type: String, required: true },
         public: { type: Boolean, default: true },
-        status: { type: String, enum: ['WILL HOLD', 'HOLDING', 'HAS HELD'], default: 'WILL HOLD' }
+        status: { type: String, enum: ['WILL HOLD', 'HOLDING', 'HAS HELD'], default: 'WILL HOLD' },
+        image_url: {
+            type: String,
+            default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRTrkWoUsmE8_F4bllOMP1qa1ds7nGBn_bYcNA8SN0rRHLllScC'
+        }
     }
 
     TalkSchema = new Schema(TalkDefinition, {
