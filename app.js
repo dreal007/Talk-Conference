@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var index = require('./routes/index');
 var passport = require('passport');
+var serveStatic = require('serve-static');
 require("dotenv").config();
 
 var app = express();
@@ -22,11 +23,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
+app.use(serveStatic(__dirname + "/dist"));
 
 app.use('/', index);
-
+// app.get('*', function (req, res, next) {
+//   res.sendFile(path.resolve('public/index.html'));
+// });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
