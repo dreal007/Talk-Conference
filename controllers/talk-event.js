@@ -60,6 +60,7 @@ Cntrl.get = function(req, res){
     getWithPopulate(req.params).then((talkEvent)=>{
         res.json(transformResponse(1, 'ok', talkEvent));
     }).catch((error) => {
+        console.log(error)
         res.status(400).json(transformResponse(0, error.message));
     });
 }

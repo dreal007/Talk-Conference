@@ -2,6 +2,7 @@
 const { transformResponse, transformExpressValidationErrors } = require('../utils/transformer');
 const { validationResult } = require('express-validator');
 const { createTalk, getTalks, deleteTalk, updateTalk } = require('../processors/talk');
+const { remove } = require('../processors/talk-event');
 const Cntrl = {}
 
 Cntrl.createTalk = function(req, res){
@@ -46,10 +47,14 @@ Cntrl.deleteTalk = function(req, res){
     }
 
     deleteTalk(req.params.id).then((deletedTalk) => {
-        res.json(transformResponse(1, 'ok', deletedTalk));
+        if(deletedTalk) return remove(req.params);
+    }).then((resp) => {
+        res.json(transformResponse(1, 'ok', resp));
     }).catch((error) => {
         res.status(400).json(transformResponse(0, error.message));
     });
+    
+   
 }
 
 Cntrl.updateTalk = function (req, res) {

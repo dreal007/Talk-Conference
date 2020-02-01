@@ -56,14 +56,14 @@ function get(body) {
 function getWithPopulate(params) {
     if (params.talk_id) {
         return TalkEvent.find({ talk_id: params.talk_id })
-            .populate('attendees').populate('talk');
+             .populate('attendees').populate('talk');
     }
     return TalkEvent.find().skip(params.skip).limit(params.limit)
         .lean().populate('attendees').populate('talk');
 }
 
 function remove(params){
-    return TalkEvent.deleteOne({ _id: params.id});
+    return TalkEvent.deleteOne({ talk_id: params.id});
 }
 
 module.exports = { get, remove, getWithPopulate, createTalkEvent, addAttendeeToTalk, removeAttendeeFromTalk }
