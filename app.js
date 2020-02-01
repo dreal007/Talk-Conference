@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
-//app.use(serveStatic(__dirname + "/dist"));
+app.use(serveStatic(__dirname + "/dist"));
 
 app.use('/', index);
 // app.get('*', function (req, res, next) {
